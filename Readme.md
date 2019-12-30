@@ -17,7 +17,8 @@ active number default 1,
 language varchar2(50)not null,
 
 constraint book_id_pk primary key(book_id),
-constraint book_name_uq unique(book_name,author_name,version));
+constraint book_name_uq unique(book_name,author_name,version)
+constraint language_ck check(languange in 'Tamil','English','Hindi','Telugu','Malayalam'));
 
 Query:
 
