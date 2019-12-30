@@ -14,7 +14,6 @@ publisher varchar2(50)not null
 published_date date not null,
 version number,
 category varchar2(50)not null,
-active number default 1,
 language varchar2(50)not null,
 
 constraint book_id_pk primary key(book_id),
