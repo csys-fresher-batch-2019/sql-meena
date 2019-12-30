@@ -5,9 +5,6 @@
 * User should able to view all the books.
 
 ### Feature 1:List all the books.
-'''sql
-create table
-sql'''
 
 create table books2(
 book_id number,
@@ -23,4 +20,5 @@ constraint book_id_pk primary key(book_id),
 constraint book_name_uq unique(book_name,author_name,version));
 
 Query:
+
 select *from books;
