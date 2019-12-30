@@ -20,8 +20,8 @@ language varchar2(50)not null,
 constraint book_id_pk primary key(book_id),
 constraint book_name_uq unique(book_name,author_name,version),
 constraint published_date_ck check(published_date<=systimestamp),
-constraint language_ck check(languange in 'Tamil','English','Hindi','Telugu','Malayalam')
-constraint category_ck check(category in 'Technical','Biographies','Busniess','Kids','Comics','Crafts'));
+constraint language_ck check(languange in ('Tamil','English','Hindi','Telugu','Malayalam')),
+constraint category_ck check(category in ('Technical','Biographies','Busniess','Kids','Comics','Crafts')));
 
 Query:
 
