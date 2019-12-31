@@ -4,7 +4,8 @@
 ## Features
 * User should able to view all the books.
 
-### Feature 1:List all the books.
+### Feature 1:
+* List all the books.
 
 ```sql
 create table books(
