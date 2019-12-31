@@ -61,6 +61,8 @@ select *from books;
 
 #### Penality Calculation
 
+* Assuming penality as one rupee for one day.
+
 | Item_id | Book_id | User_id | Issued_date | Due_date   | Returned_date | Fine _amount | Status |
 |---------|---------|---------|-------------|------------|---------------|--------------|--------|
 | 1       | 3       | 2       | 12.12.2019  | 25.12.2019 | 23.12.2019    | 0            |Returned|
