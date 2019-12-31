@@ -38,12 +38,6 @@ select *from books;
 | 2       | Rich dad poor dad                        | Robert T.Kiyosaki | Plata publishing       | 11 Apr 2017    |         | Business | English  |
 | 3       | Harry potter and the philosopher's stone | J K Rowling       | Bloomsburry Press      | 3 Sep 2014     | 1       | Novel    | English  |
 | 4       | Harry Potter and Chamber of Secrets      | J k Rowling       | Bloomsburry Press      | 3 Sep 2014     | 2       | Novel    | English  |
-| 5       | Anmol Kahaniya                           | Premchand         | Maple Press            | 20 May 2015    |         | Novel    | Hindi    |
-| 6       | Chandragupt                              | Jaishankar Prasad | Public Domain Books    | 12 Nov 2012    |         | Novel    | Hindi    |
-| 7       | Sirukathai Thoguppu                      | Jayakanthan       | Pustaka Digital Media  | 4 apr 2013     | 1       | Story    | Tamil    |
-| 8       | Chanakya Neeti                           | B.K.Chaturvedi    | Diamond Books          | 1 Jan 2012     |         | Story    | Tamil    |
-| 9       | Childish Longings                        | Harish Sant       | Notion Press           | 25 Nov 2019    |         | Horror   | English  |
-| 10      | Horror Tales                             | Mohit Dasani      | Notion Press           | 1 Jan 2019     |         | Horror   | Hindi    |
 
 
 #### User_Details
@@ -54,12 +48,6 @@ select *from books;
 | 2       | Hemanth   | 79A Vakkil street, MRS Compound, Kovilpatti    | 7708467423 |
 | 3       | Vignesh   | 693 Raju nagar, First street, Kanchipuram      | 9807865454 |
 | 4       | Aarthi    | 100,East street, Thoothukudi                   | 9725202379 |
-| 5       | Kowsalya  | no.13, 7G rainbow colony, Dubai                | 8220289026 |
-| 6       | Meenakshi | 112,Renugambal nagar, First street, Kelambakam | 8667705466 |
-| 7       | Poorani   | 897/3A,Kaveri block, MGR colony, Madurai       | 9035674821 |
-| 8       | Priya     | 63 B,Lenin colony, Thoothukudi                 | 8734256756 |
-| 9       | Rishi     | 45B,Bharathi Nagar, Kovilpatti                 | 8976590643 |
-| 10      | Sumitha   | 78/113b,Laksmi Nagar, Main Road, Rajapalayum   | 9443878667 |
 
 
 #### Books Stock Room
