@@ -29,7 +29,7 @@ Query:
 ```sql
 select *from books;
 ```
-#### Table
+#### Books
 
 | Book_id | Book_name                                | Author_name       | publisher              | published_date | version | category | Language |
 |---------|------------------------------------------|-------------------|------------------------|----------------|---------|----------|----------|
@@ -43,3 +43,46 @@ select *from books;
 | 8       | Chanakya Neeti                           | B.K.Chaturvedi    | Diamond Books          | 1 Jan 2012     |         | Story    | Tamil    |
 | 9       | Childish Longings                        | Harish Sant       | Notion Press           | 25 Nov 2019    |         | Horror   | English  |
 | 10      | Horror Tales                             | Mohit Dasani      | Notion Press           | 1 Jan 2019     |         | Horror   | Hindi    |
+
+
+#### User_Details
+
+| User_id | User_name | Address                                        | Ph_no      |
+|---------|-----------|------------------------------------------------|------------|
+| 1       | Keerthana | 79A Vakkil street, MRS Compound, Kovilpatti    | 9489745432 |
+| 2       | Hemanth   | 79A Vakkil street, MRS Compound, Kovilpatti    | 7708467423 |
+| 3       | Vignesh   | 693 Raju nagar, First street, Kanchipuram      | 9807865454 |
+| 4       | Aarthi    | 100,East street, Thoothukudi                   | 9725202379 |
+| 5       | Kowsalya  | no.13, 7G rainbow colony, Dubai                | 8220289026 |
+| 6       | Meenakshi | 112,Renugambal nagar, First street, Kelambakam | 8667705466 |
+| 7       | Poorani   | 897/3A,Kaveri block, MGR colony, Madurai       | 9035674821 |
+| 8       | Priya     | 63 B,Lenin colony, Thoothukudi                 | 8734256756 |
+| 9       | Rishi     | 45B,Bharathi Nagar, Kovilpatti                 | 8976590643 |
+| 10      | Sumitha   | 78/113b,Laksmi Nagar, Main Road, Rajapalayum   | 9443878667 |
+
+
+#### Books Stock Room
+
+| Book_stock_id | Book_id | Quantity |
+|---------------|---------|----------|
+| 1             | 5       | 150      |
+| 2             | 6       | 95       |
+| 3             | 9       | 75       |
+
+
+#### Penality Calculation
+
+| Item_id | Book_id | User_id | Issued_date | Due_date   | Returned_date | Fine _amount |
+|---------|---------|---------|-------------|------------|---------------|--------------|
+| 1       | 3       | 2       | 12.12.2019  | 25.12.2019 | 23.12.2019    | 0            |
+| 2       | 5       | 4       | 15.12.2019  | 30.12.2019 | 31.12.2019    | 1            |
+| 3       | 2       | 1       | 7.11.2019   | 22.11.2019 | 30.12.2019    | 8            |
+
+
+#### Requested Books
+
+| Item_id | Book_id | User_id | Issued_date | Due_date   | Returned_date | Fine _amount |
+|---------|---------|---------|-------------|------------|---------------|--------------|
+| 1       | 3       | 2       | 12.12.2019  | 25.12.2019 | 23.12.2019    | 0            |
+| 2       | 5       | 4       | 15.12.2019  | 30.12.2019 | 31.12.2019    | 1            |
+| 3       | 2       | 1       | 7.11.2019   | 22.11.2019 | 30.12.2019    | 8            |
