@@ -132,6 +132,7 @@ update penality_calculation set due_date=issued_date+15 where status='Issued';
 update penality_calculation set returned_date=to_date('25-10-19','dd-MM-yyyy')where book_id=1;
 update penality_calculation set fine_amount=0,status='Returned' where(returned_date<=due_date);
 update penality_calculation set fine_amount=((returned_date-due_date)*2),status='Returned'where (returned_date>due_date);
+update penality_calculation set fine_amount=((sysdate-due_date)*2)where(due_date<sysdate)and status='Issued';
 
 ```
 
