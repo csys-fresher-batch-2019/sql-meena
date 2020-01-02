@@ -253,8 +253,7 @@ select book_name,count(*)from fine_calc k,book n where k.book_id=n.book_id group
 | 2       | Rich dad poor dad                        | 2           |
 | 3       | Harry potter and the philosopher's stone | 1           |
 
-### Feature 7:
-* Collect the complete details of the single user.
+
 
 
 
