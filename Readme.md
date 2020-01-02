@@ -143,4 +143,7 @@ update penality_calculation set fine_amount=((sysdate-due_date)*2)where(due_date
 | 3       | 2       | 1       | 7.11.2019   | 22.11.2019 | 30.12.2019    | 8            |Returned|
 
 
+###Stock updation:
+
+
 
