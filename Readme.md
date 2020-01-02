@@ -3,7 +3,10 @@
 
 ## Features
 * User should able to view all the books.
-* User should able to 
+* To calculate the fine amount.
+* To update the stock room.
+* To identify the total number of books taken by each person.
+* To check availablity of the user.
 
 ### Feature 1:
 * List all the books.
@@ -45,7 +48,7 @@ insert into books(book_id,book_name,author_name,publisher,category,language)valu
 
 select *from books;
 ```
-#### Books
+### Books
 
 | Book_id | Book_name                                | Author_name       | publisher              |  version | category | Language |
 |---------|------------------------------------------|-------------------|------------------------|----------|----------|----------|
@@ -56,7 +59,7 @@ select *from books;
 
 
 
-#### User_Details
+### User_Details
 
 Query:
 
@@ -86,7 +89,7 @@ insert into users(user_id,user_name,address,ph_no)values(user_id_seq.nextval,'Me
 | 4       | Aarthi    | 100,East street, Thoothukudi                   | 9725202379 |
 
 
-#### Books Stock Room
+### Books Stock Room
 Query:
 ```sql
 create books_stock(book_id number not null,book_stock_id number,quantity number not null,issued_books number default 0,constraint book_stock_id_pk primary key(book_stock_id),
@@ -109,7 +112,7 @@ insert into book_stock(book_stock_id,book_id,quantity)values(book_stock_id_seq.n
 | 3             | 9       | 75       | 0            |
 
 
-#### Issued details:
+### Issued details:
 
 * Issued details each of the book.
 
@@ -211,6 +214,33 @@ from fine_calc group by user_id;
 | 3             | 3       | 1        | 
 
 ### Feature 5:
+* Updating stock room.
+```sql
+CREATE OR REPLACE FUNCTION ISSUE 
+(K_book_id in number)
+RETURN NUMBER AS 
+pragma autonomous_transaction;
+ts_stock NUMBER;
+ts_book NUMBER;
+BEGIN
+select (count(book_id))into ts_stock from fine_calc where book_id=K_book_id;
+  RETURN ts_stock;
+END ISSUE;
+```
+```sql
+update stock_room set issued_books_total=issue(book_id);
+```
+```sql
+select *from stock_room;
+```
+| Book_stock_id | Book_id | Quantity | Issued_books |
+|---------------|---------|----------|--------------| 
+| 1             | 5       | 150      | 2            |
+| 2             | 6       | 95       | 1            | 
+| 3             | 9       | 75       | 0            |
+
+
+### Feature 6:
 
 * Find the total count of the each book that have been issued.
 ```sql
@@ -222,6 +252,21 @@ select book_name,count(*)from fine_calc k,book n where k.book_id=n.book_id group
 | 1       | Think and Grow rich                      | 1           |
 | 2       | Rich dad poor dad                        | 2           |
 | 3       | Harry potter and the philosopher's stone | 1           |
+
+### Feature 7:
+* Collect the complete details of the single user.
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
