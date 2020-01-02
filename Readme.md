@@ -3,6 +3,7 @@
 
 ## Features
 * User should able to view all the books.
+* User should able to 
 
 ### Feature 1:
 * List all the books.
@@ -108,9 +109,9 @@ insert into book_stock(book_stock_id,book_id,quantity)values(book_stock_id_seq.n
 | 3             | 9       | 75       | 0            |
 
 
-#### Penality Calculation
+#### Issued details:
 
-* Assuming penality as two rupees per day.
+* Issued details each of the book.
 
 ```sql
 
@@ -131,11 +132,6 @@ insert into fine_calc(item_id,book_id,user_id,issued_date)values(item_id_seq.nex
 update fine_calc set due_date=issued_date+15;
 ```
 
-update penality_calculation set returned_date=to_date('25-10-19','dd-MM-yyyy')where book_id=1;
-update penality_calculation set fine_amount=0,status='Returned' where(returned_date<=due_date);
-update penality_calculation set fine_amount=((returned_date-due_date)*2),status='Returned'where (returned_date>due_date);
-update penality_calculation set fine_amount=((sysdate-due_date)*2)where(due_date<sysdate)and status='Issued'
-
 | Item_id | Book_id | User_id | Issued_date | Due_date   | Fine _amount | Status |
 |---------|---------|---------|-------------|------------|--------------|--------|
 | 1       | 3       | 2       | 12.12.2019  | 25.12.2019 | -            |Issued  |
@@ -144,7 +140,9 @@ update penality_calculation set fine_amount=((sysdate-due_date)*2)where(due_date
 
 
 ### Feature 2:
+
 * Calculating fine amount for the each user.
+* Assuming penality as two rupees per day.
 ```sql
 create or replace FUNCTION FINE_AMOUNT1  
 (I_book_id in number,I_user_id in number)
@@ -176,7 +174,7 @@ select *from penality_calculation;
 | 2       | 5       | 4       | 15.12.2019  | 30.12.2019 | 6            |Issued  |
 | 3       | 2       | 1       | 7.11.2019   | 22.11.2019 | 22           |Issued  |
 
-### Feature:
+### Feature 3:
 * Number of books each user has taken
 ```sql
 select user_name, count(*)from fine_calc f,users u where u.user_id=f.user_id group by user_name;
@@ -187,7 +185,7 @@ select user_name, count(*)from fine_calc f,users u where u.user_id=f.user_id gro
 | 2       | Keerthana   | 1     | 
 | 3       | Kowsalya    | 3     | 
 
-### Feature:
+### Feature 4:
 * Checking Availablity
 ```sql
 CREATE OR REPLACE FUNCTION COUNT2 
@@ -212,9 +210,18 @@ from fine_calc group by user_id;
 | 2             | 2       | 0        |
 | 3             | 3       | 1        | 
 
+### Feature 5:
 
+* Find the total count of the each book that have been issued.
+```sql
+select book_name,count(*)from fine_calc k,book n where k.book_id=n.book_id group by book_name;
+```
 
-
+| No      | Book_name                                | Count       | 
+|---------|------------------------------------------|-------------|
+| 1       | Think and Grow rich                      | 1           |
+| 2       | Rich dad poor dad                        | 2           |
+| 3       | Harry potter and the philosopher's stone | 1           |
 
 
 
