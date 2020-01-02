@@ -88,7 +88,7 @@ insert into users(user_id,user_name,address,ph_no)values(user_id_seq.nextval,'Me
 #### Books Stock Room
 Query:
 ```sql
-create books_stock(book_id number not null,book_stock_id number,quantity number not null,constraint book_stock_id_pk primary key(book_stock_id),
+create books_stock(book_id number not null,book_stock_id number,quantity number not null,issued_books number default 0,constraint book_stock_id_pk primary key(book_stock_id),
 constraint book_id_fk foreign key(book_id)references books(book_id),constraint quantity_ck check(quantity>=0));
 
 create sequence book_stock_id_seq start with 1 increment by 1;
@@ -101,49 +101,83 @@ insert into book_stock(book_stock_id,book_id,quantity)values(book_stock_id_seq.n
 insert into book_stock(book_stock_id,book_id,quantity)values(book_stock_id_seq.nextval,6,10);
 ```
 
-| Book_stock_id | Book_id | Quantity |
-|---------------|---------|----------|
-| 1             | 5       | 150      |
-| 2             | 6       | 95       |
-| 3             | 9       | 75       |
+| Book_stock_id | Book_id | Quantity | Issued_books |
+|---------------|---------|----------|--------------| 
+| 1             | 5       | 150      | 0            |
+| 2             | 6       | 95       | 0            | 
+| 3             | 9       | 75       | 0            |
 
 
 #### Penality Calculation
 
-* Assuming penality as one rupee for one day.
+* Assuming penality as two rupees per day.
 
 ```sql
 
-create penality_calculation(item_id number,book_id number not null,user_id number not null,issued_date date not null,due_date date,returned_date,fine_amount number,
+create create fine_calc(item_id number,book_id number not null,user_id number not null,issued_date date not null,due_date date,returned_date,fine_amount number,
 status varchar2(50)default 'Issued',constraint item_id_pk primary key(item_id),constraint book_id_fk1 foreign key(book_id)references books(book_id),
 constraint user_id_fk foreign key(user_id)references users(user_id),constraint status_ck check(status in('Issued','Returned')));
 
 create sequence item_id_seq start with 1 increment by 1;
 
-insert into penality_calculation(item_id,book_id,user_id,issued_date,returned_date,status)values(item_id_seq.nextval,3,2,to_date('12-12-2019','dd-MM-yyyy'));
+insert into fine_calc(item_id,book_id,user_id,issued_date,returned_date,status)values(item_id_seq.nextval,3,2,to_date('12-12-2019','dd-MM-yyyy'));
 
-insert into penality_calculation(item_id,book_id,user_id,issued_date)values(item_id_seq.nextval,5,4,to_date('15-12-2019','dd-MM-yyyy'));
+insert into fine_calc(item_id,book_id,user_id,issued_date)values(item_id_seq.nextval,5,4,to_date('15-12-2019','dd-MM-yyyy'));
 
-insert into penality_calculation(item_id,book_id,user_id,issued_date,returned_date,status)values(item_id_seq.nextval,2,1,to_date('12-11-2019','dd-MM-yyyy'));
+insert into fine_calc(item_id,book_id,user_id,issued_date,returned_date,status)values(item_id_seq.nextval,2,1,to_date('12-11-2019','dd-MM-yyyy'));
 
-insert into penality_calculation(item_id,book_id,user_id,issued_date)values(item_id_seq.nextval,1,3,to_date('14-12-2019','dd-MM-yyyy'));
+insert into fine_calc(item_id,book_id,user_id,issued_date)values(item_id_seq.nextval,1,3,to_date('14-12-2019','dd-MM-yyyy'));
 
-update penality_calculation set due_date=issued_date+15 where status='Issued';
+update fine_calc set due_date=issued_date+15;
+```
+
 update penality_calculation set returned_date=to_date('25-10-19','dd-MM-yyyy')where book_id=1;
 update penality_calculation set fine_amount=0,status='Returned' where(returned_date<=due_date);
 update penality_calculation set fine_amount=((returned_date-due_date)*2),status='Returned'where (returned_date>due_date);
-update penality_calculation set fine_amount=((sysdate-due_date)*2)where(due_date<sysdate)and status='Issued';
+update penality_calculation set fine_amount=((sysdate-due_date)*2)where(due_date<sysdate)and status='Issued'
+
+| Item_id | Book_id | User_id | Issued_date | Due_date   | Fine _amount | Status |
+|---------|---------|---------|-------------|------------|--------------|--------|
+| 1       | 3       | 2       | 12.12.2019  | 25.12.2019 | -            |Issued  |
+| 2       | 5       | 4       | 15.12.2019  | 30.12.2019 | -            |Issued  |
+| 3       | 2       | 1       | 7.11.2019   | 22.11.2019 | -           |Issued   |
+
+
+### Feature 2:
+* Calculating fine amount for the each user.
+```sql
+create or replace FUNCTION FINE_AMOUNT1  
+(I_book_id in number,I_user_id in number)
+RETURN NUMBER AS 
+pragma autonomous_transaction;
+FINE_M NUMBER;
+v_due_date date;
+BEGIN
+
+   select due_date into v_due_date from fine_calc where user_id=I_user_id and book_id=I_book_id; 
+   IF v_due_date < SYSDATE THEN
+     FINE_M:=(trunc( SYSDATE -v_due_date))*2;
+   ELSE
+      FINE_M:=0;
+   END IF;
+   
+  RETURN  FINE_M;
+END FINE_AMOUNT1;
 
 ```
+* Display the fine amount table.
+```sql
+update fine_calc set fine_amount=FINE_AMOUNT1( book_id, user_id);---- where book_id=5 and user_id=4;
+select *from penality_calculation;
+```
+| Item_id | Book_id | User_id | Issued_date | Due_date   | Fine _amount | Status |
+|---------|---------|---------|-------------|------------|--------------|--------|
+| 1       | 3       | 2       | 12.12.2019  | 25.12.2019 |  16          |Issued  |
+| 2       | 5       | 4       | 15.12.2019  | 30.12.2019 | 6            |Issued  |
+| 3       | 2       | 1       | 7.11.2019   | 22.11.2019 | 22           |Issued  |
 
-| Item_id | Book_id | User_id | Issued_date | Due_date   | Returned_date | Fine _amount | Status |
-|---------|---------|---------|-------------|------------|---------------|--------------|--------|
-| 1       | 3       | 2       | 12.12.2019  | 25.12.2019 | 23.12.2019    | 0            |Returned|
-| 2       | 5       | 4       | 15.12.2019  | 30.12.2019 | 31.12.2019    | 1            |Returned|
-| 3       | 2       | 1       | 7.11.2019   | 22.11.2019 | 30.12.2019    | 8            |Returned|
+### Stock updation:
 
-
-###Stock updation:
-
+update
 
 
