@@ -176,8 +176,46 @@ select *from penality_calculation;
 | 2       | 5       | 4       | 15.12.2019  | 30.12.2019 | 6            |Issued  |
 | 3       | 2       | 1       | 7.11.2019   | 22.11.2019 | 22           |Issued  |
 
-### Stock updation:
+### Feature:
+* Number of books each user has taken
+```sql
+select user_name, count(*)from fine_calc f,users u where u.user_id=f.user_id group by user_name;
+```
+| Number  |  user_name  | count | 
+|---------|-------------|-------|
+| 1       | Hemanth     | 1     |
+| 2       | Keerthana   | 1     | 
+| 3       | Kowsalya    | 3     | 
 
-update
+### Feature:
+* Checking Availablity
+```sql
+CREATE OR REPLACE FUNCTION COUNT2 
+(U_user_id in number)
+RETURN NUMBER AS
+pragma autonomous_transaction;
+vs_limit NUMBER;
+nw_limit NUMBER;
+BEGIN
+select (count(user_id))into vs_limit from fine_calc where user_id=u_user_id;
+ nw_limit:=vs_limit;
+  RETURN nw_limit;
+END COUNT2;
+
+select user_id, sum(case when count2(user_id)<=3 then 3-count2(user_id)else 0 end)as remaining
+from fine_calc group by user_id;
+
+```
+| id            | User_id | Remaining| 
+|---------------|---------|----------|
+| 1             | 1       | 2        |
+| 2             | 2       | 0        |
+| 3             | 3       | 1        | 
+
+
+
+
+
+
 
 
