@@ -2,7 +2,7 @@
 * http://booktreasury.com
 
 ## Features
-* User should able to view all the books.
+* User should able to view all the tables.
 * To calculate the fine amount.
 * To update the stock room.
 * To identify the total number of books taken by each person.
