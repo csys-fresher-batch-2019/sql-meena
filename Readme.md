@@ -1,4 +1,4 @@
-# Book Treasury App
+# Library Management System
 * http://booktreasury.com
 
 ## Features
