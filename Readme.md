@@ -69,15 +69,22 @@ constraint ph_no_ck check(length(to_char(ph_no))=10),constraint ph_no_uq unique(
 
 create sequence user_id_seq start with 1 increment by 1;
 
-insert into users(user_id,user_name,address,ph_no)values(user_id_seq.nextval,'Keerthana','79A Vakkil street, MRS Compound, Kovilpatti',9489745432);
+insert into users(user_id,user_name,address,ph_no)values(user_id_seq.nextval,
+'Keerthana','79A Vakkil street, MRS Compound, Kovilpatti',9489745432);
 
-insert into users(user_id,user_name,address,ph_no)values(user_id_seq.nextval,'Hemanth','79A Vakkil street, MRS Compound, Kovilpatti',7708467423);
+insert into users(user_id,user_name,address,ph_no)values(user_id_seq.nextval,
+'Hemanth','79A Vakkil street, MRS Compound, Kovilpatti',7708467423);
 
-insert into users(user_id,user_name,address,ph_no)values(user_id_seq.nextval,' Aarthi ','100,East street, Thoothukudi',9725202379);
+insert into users(user_id,user_name,address,ph_no)values(user_id_seq.nextval,
+' Aarthi ','100,East street, Thoothukudi',9725202379);
 
-insert into users(user_id,user_name,address,ph_no)values(user_id_seq.nextval,'Kowsalya','no.13, 7G rainbow colony, Dubai',8220289026);
+insert into users(user_id,user_name,address,ph_no)values(user_id_seq.nextval,
+'Kowsalya','no.13, 7G rainbow colony, Dubai',8220289026);
 
-insert into users(user_id,user_name,address,ph_no)values(user_id_seq.nextval,'Meenakshi','112,Renugambal nagar, First street, Kelambakam',8667705466);
+insert into users(user_id,user_name,address,ph_no)values(user_id_seq.nextval,
+'Meenakshi','112,Renugambal nagar, First street, Kelambakam',8667705466);
+
+select *from users;
 ```
 
 
@@ -103,6 +110,8 @@ insert into book_stock(book_stock_id,book_id,quantity)values(book_stock_id_seq.n
 insert into book_stock(book_stock_id,book_id,quantity)values(book_stock_id_seq.nextval,4,30);
 insert into book_stock(book_stock_id,book_id,quantity)values(book_stock_id_seq.nextval,5,100);
 insert into book_stock(book_stock_id,book_id,quantity)values(book_stock_id_seq.nextval,6,10);
+
+select *from book_stock;
 ```
 
 | Book_stock_id | Book_id | Quantity | Issued_books |
@@ -133,6 +142,8 @@ insert into fine_calc(item_id,book_id,user_id,issued_date,returned_date,status)v
 insert into fine_calc(item_id,book_id,user_id,issued_date)values(item_id_seq.nextval,1,3,to_date('14-12-2019','dd-MM-yyyy'));
 
 update fine_calc set due_date=issued_date+15;
+
+select * from fine_calc
 ```
 
 | Item_id | Book_id | User_id | Issued_date | Due_date   | Fine _amount | Status |
