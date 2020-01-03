@@ -26,6 +26,8 @@ constraint version_ck check(version>=0),
 constraint book_name_uq unique(book_name,author_name,version),
 constraint language_ck check(language in ('Tamil','English','Hindi','Telugu','Malayalam')),
 constraint category_ck check(category in ('Technical','Biographies','Business','Kids','Comics','Crafts')));
+
+create sequence book_id_seq start with 1 increment by 1;
 ```
 
 Query:
