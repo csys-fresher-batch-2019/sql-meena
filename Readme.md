@@ -72,8 +72,10 @@ select *from books;
 Query:
 
 ```sql
-create table users(user_id number,user_name varchar2(50)not null,address varchar2(500),ph_no number not null,constraint user_id_pk primary key(user_id),
-constraint ph_no_ck check(length(to_char(ph_no))=10),constraint ph_no_uq unique(user_id,user_name,ph_no));
+create table users(user_id number,user_name varchar2(50)not null,address varchar2(500),
+ph_no number not null,constraint user_id_pk primary key(user_id),
+constraint ph_no_ck check(length(to_char(ph_no))=10),
+constraint ph_no_uq unique(user_id,user_name,ph_no));
 
 create sequence user_id_seq start with 1 increment by 1;
 
