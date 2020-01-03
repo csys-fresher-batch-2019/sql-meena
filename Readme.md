@@ -109,7 +109,8 @@ select *from users;
 ### Books Stock Room
 Query:
 ```sql
-create books_stock(book_id number not null,book_stock_id number,quantity number not null,issued_books number default 0,constraint book_stock_id_pk primary key(book_stock_id),
+create books_stock(book_id number not null,book_stock_id number,quantity number not null,
+issued_books number default 0,constraint book_stock_id_pk primary key(book_stock_id),
 constraint book_id_fk foreign key(book_id)references books(book_id),constraint quantity_ck check(quantity>=0));
 
 create sequence book_stock_id_seq start with 1 increment by 1;
@@ -137,19 +138,26 @@ select *from book_stock;
 
 ```sql
 
-create create fine_calc(item_id number,book_id number not null,user_id number not null,issued_date date not null,due_date date,returned_date,fine_amount number,
-status varchar2(50)default 'Issued',constraint item_id_pk primary key(item_id),constraint book_id_fk1 foreign key(book_id)references books(book_id),
-constraint user_id_fk foreign key(user_id)references users(user_id),constraint status_ck check(status in('Issued','Returned')));
+create create fine_calc(item_id number,book_id number not null,user_id number not null,
+issued_date date not null,due_date date,returned_date,fine_amount number,
+status varchar2(50)default 'Issued',constraint item_id_pk primary key(item_id),
+constraint book_id_fk1 foreign key(book_id)references books(book_id),
+constraint user_id_fk foreign key(user_id)references users(user_id),
+constraint status_ck check(status in('Issued','Returned')));
 
 create sequence item_id_seq start with 1 increment by 1;
 
-insert into fine_calc(item_id,book_id,user_id,issued_date,returned_date,status)values(item_id_seq.nextval,3,2,to_date('12-12-2019','dd-MM-yyyy'));
+insert into fine_calc(item_id,book_id,user_id,issued_date,returned_date,status)
+values(item_id_seq.nextval,3,2,to_date('12-12-2019','dd-MM-yyyy'));
 
-insert into fine_calc(item_id,book_id,user_id,issued_date)values(item_id_seq.nextval,5,4,to_date('15-12-2019','dd-MM-yyyy'));
+insert into fine_calc(item_id,book_id,user_id,issued_date)
+values(item_id_seq.nextval,5,4,to_date('15-12-2019','dd-MM-yyyy'));
 
-insert into fine_calc(item_id,book_id,user_id,issued_date,returned_date,status)values(item_id_seq.nextval,2,1,to_date('12-11-2019','dd-MM-yyyy'));
+insert into fine_calc(item_id,book_id,user_id,issued_date,returned_date,status)
+values(item_id_seq.nextval,2,1,to_date('12-11-2019','dd-MM-yyyy'));
 
-insert into fine_calc(item_id,book_id,user_id,issued_date)values(item_id_seq.nextval,1,3,to_date('14-12-2019','dd-MM-yyyy'));
+insert into fine_calc(item_id,book_id,user_id,issued_date)
+values(item_id_seq.nextval,1,3,to_date('14-12-2019','dd-MM-yyyy'));
 
 update fine_calc set due_date=issued_date+15;
 
