@@ -32,20 +32,26 @@ create sequence book_id_seq start with 1 increment by 1;
 
 Query:
 ```sql
-insert into books(book_id,book_name,author_name,publisher,category,language)values(book_id_seq.nextval,'Think and Grow rich','Napoleon Hill','Fingerprint Publishing',
+insert into books(book_id,book_name,author_name,publisher,category,language)
+values(book_id_seq.nextval,'Think and Grow rich','Napoleon Hill','Fingerprint Publishing',
 'Business','English');
 
-insert into books(book_id,book_name,author_name,publisher,category,language)values(book_id_seq.nextval,'Rich and poor dad','Robert T.Kiyosaki','Plata publishing',
+insert into books(book_id,book_name,author_name,publisher,category,language)
+values(book_id_seq.nextval,'Rich and poor dad','Robert T.Kiyosaki','Plata publishing',
 'Business','English');
 
-insert into books(book_id,book_name,author_name,publisher,version,category,language)values(book_id_seq.nextval,'Harry potter and the philosopher's stone ','J K Rowling ',
+insert into books(book_id,book_name,author_name,publisher,version,category,language)
+values(book_id_seq.nextval,'Harry potter and the philosopher's stone ','J K Rowling ',
 'Bloomsburry Press',1,'Novel','English');
 
-insert into books(book_id,book_name,author_name,publisher,version,category,language)values(book_id_seq.nextval,'Harry potter and Chamber of Secrets','J K Rowling ',2,'Novel','English');
+insert into books(book_id,book_name,author_name,publisher,version,category,language)
+values(book_id_seq.nextval,'Harry potter and Chamber of Secrets','J K Rowling ',2,'Novel','English');
 
-insert into books(book_id,book_name,author_name,publisher,category,language)values(book_id_seq.nextval,'Anmol Kahaniya ','Premchand  ','Maple Press ','Novel','Hindi');
+insert into books(book_id,book_name,author_name,publisher,category,language)
+values(book_id_seq.nextval,'Anmol Kahaniya ','Premchand  ','Maple Press ','Novel','Hindi');
 
-insert into books(book_id,book_name,author_name,publisher,category,language)values(book_id_seq.nextval,'Chandragupt','Jaishankar Prasad','Public Domain Books','Novel','Hindi');
+insert into books(book_id,book_name,author_name,publisher,category,language)
+values(book_id_seq.nextval,'Chandragupt','Jaishankar Prasad','Public Domain Books','Novel','Hindi');
 
 
 select *from books;
